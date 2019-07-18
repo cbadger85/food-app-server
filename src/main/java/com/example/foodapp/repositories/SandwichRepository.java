@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Component
 public class SandwichRepository {
@@ -182,8 +183,15 @@ public class SandwichRepository {
         return ingredients;
     }
 
-    public Optional<SandwichIngredientModel> getIngredientById(String id) {
-        return ingredients.stream().filter(ingredient -> ingredient.getId().equals(id)).findFirst();
+    public SandwichIngredientModel getIngredientById(String id) {
+
+        List<SandwichIngredientModel> ingredientList = ingredients.stream().filter(ingredient -> ingredient.getId().equals(id)).collect(Collectors.toList());
+
+        if(ingredientList.size() == 0) {
+            return null;
+        }
+
+        return ingredientList.get(0);
     }
 
 }

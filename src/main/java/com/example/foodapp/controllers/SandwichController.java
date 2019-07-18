@@ -23,7 +23,7 @@ public class SandwichController {
     }
 
     @GetMapping("/ingredients/{id}")
-    public Optional<SandwichIngredientModel> getIngredientById(@PathVariable String id) {
+    public SandwichIngredientModel getIngredientById(@PathVariable String id) {
         return repository.getIngredientById(id);
     }
 }
